@@ -1,5 +1,3 @@
-// import Ship from "./ship.js";
-
 export default function Gameboard() {
   const gameboard = [];
   const shipsCoordinates = [];
@@ -26,7 +24,6 @@ export default function Gameboard() {
     for (let i = 0; i < ship.getLength(); i++) {
       gameboard[row][column+i] = "o";
     }
-    // maybe add them as objects?
    
     shipsCoordinates.push({row, column, ship}); 
   };
@@ -58,24 +55,25 @@ export default function Gameboard() {
   const areAllShipsSunk = () => {
     let shipsSunk = 0;
     // see if you can change this to a reduce function
-    /* shipsCoordinates.reduce( (acc, cur) => {
-        if (cur.isSunk()) return acc + 1
-        else return acc + 0
-     }
+    shipsSunk = shipsCoordinates.reduce( (acc, cur) => {
+      if (cur.ship.isSunk()) return acc + 1;
+      return acc + 0;
+    }, 0);
     
-    } */
-    for (let i = 0; i < shipsCoordinates.length; i++) {
-      if (shipsCoordinates[i].ship.isSunk()) {
-        shipsSunk++;
-      }
-    }
+    
+    // for (let i = 0; i < shipsCoordinates.length; i++) {
+    //   if (shipsCoordinates[i].ship.isSunk()) {
+    //     shipsSunk++;
+    //   }
+    // }
+    console.log(shipsSunk);
     return shipsSunk === shipsCoordinates.length;
   };
 
   return { getGameboard, placeShip, printGameboard, receiveAttack, getMissedAttacks, areAllShipsSunk };
 }
 
-
+// import Ship from "./ship.js";
 // const g = Gameboard();
 // const ship1 = Ship(3);
 // const ship2 = Ship(3);
@@ -88,8 +86,16 @@ export default function Gameboard() {
 // g.receiveAttack(3,3);
 // g.receiveAttack(3,5);
 // g.receiveAttack(3,6);
+// g.receiveAttack(6,9);
+
+// g.receiveAttack(4,3);
+// g.receiveAttack(4,4);
+// g.receiveAttack(4,5);
+
 
 // g.printGameboard();
 // console.log(ship1.isSunk());
+// console.log(ship2.isSunk());
+
 // console.log(g.getMissedAttacks());
 // console.log(g.areAllShipsSunk());
