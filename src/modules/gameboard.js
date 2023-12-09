@@ -27,7 +27,8 @@ export default function Gameboard() {
       gameboard[row][column+i] = "o";
     }
     // maybe add them as objects?
-    shipsCoordinates.push([row, column, ship]);
+   
+    shipsCoordinates.push({row, column, ship}); 
   };
 
   // for visualization purposes
@@ -45,10 +46,10 @@ export default function Gameboard() {
   const receiveAttack = (row, column) => {
     if (gameboard[row][column] === "o") {
       for (let i = 0; i < shipsCoordinates.length; i++) {
-        const arr = shipsCoordinates[i];
-        if (row === arr[0] && (column >= arr[1] && column < arr[1] + arr[2].getLength())) {
+        const obj = shipsCoordinates[i];
+        if (row === obj.row && (column >= obj.column && column < obj.column + obj.ship.getLength())) {
           gameboard[row][column] = "x";
-          arr[2].hit();
+          obj.ship.hit();
         }
       }
     } else missedAttacks.push([row, column]);
@@ -57,8 +58,14 @@ export default function Gameboard() {
   const areAllShipsSunk = () => {
     let shipsSunk = 0;
     // see if you can change this to a reduce function
+    /* shipsCoordinates.reduce( (acc, cur) => {
+        if (cur.isSunk()) return acc + 1
+        else return acc + 0
+     }
+    
+    } */
     for (let i = 0; i < shipsCoordinates.length; i++) {
-      if (shipsCoordinates[i][2].isSunk()) {
+      if (shipsCoordinates[i].ship.isSunk()) {
         shipsSunk++;
       }
     }
@@ -70,10 +77,8 @@ export default function Gameboard() {
 
 
 // const g = Gameboard();
-// const ship1 = Ship();
-// const ship2 = Ship();
-// ship1.setLengthOfShip(3);
-// ship2.setLengthOfShip(3);
+// const ship1 = Ship(3);
+// const ship2 = Ship(3);
 
 // g.placeShip(3, 3, ship1);
 // g.placeShip(4, 3, ship2);
