@@ -8,6 +8,13 @@
  */
 
 
+const player = (name) => {
+  const playerName = name;
+    
+  const getPlayerName = () => playerName;
+
+  return { getPlayerName, };
+};
 
 
 
