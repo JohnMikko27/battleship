@@ -19,7 +19,7 @@ const player = (name) => {
 const p = player("hi");
 console.log(p.getPlayerName());
 
-
+// might need a placeAllships at random places function, or should this be in gameboard?
 const computer = () => {
   const shots = [];
   
@@ -34,6 +34,7 @@ const computer = () => {
     });
     return flag;
   };
+  
   const chooseRandomShot = () => {
     let returnValue = null;
     const row = Math.round(Math.random() * 10);
@@ -54,3 +55,4 @@ console.log(c.chooseRandomShot());
 // console.log(c.chooseRandomShot());
 
 // console.log(c.getShots());
+export {player, computer};
