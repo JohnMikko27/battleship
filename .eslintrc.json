@@ -17,8 +17,9 @@
             "double"
         ],
         "no-plusplus": "off",
-        "indent": ["error", 2],
+        "indent": ["warn", 2],
         "semi": ["warn", "always"],
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "no-undef": "off"
     }
 }

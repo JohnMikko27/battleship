@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Ship from "../modules/ship";
 
 let ship;

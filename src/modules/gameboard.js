@@ -70,7 +70,9 @@ export default function Gameboard() {
     return shipsSunk === shipsCoordinates.length;
   };
 
-  return { getGameboard, placeShip, printGameboard, receiveAttack, getMissedAttacks, areAllShipsSunk };
+  // I think I have to test placeship, receiveAttack, and areAllShips sunk 
+  // at least whichever functions will ultimately be used with other funtions like ship function
+  return { createGameboard, getGameboard, placeShip, printGameboard, receiveAttack, getMissedAttacks, areAllShipsSunk };
 }
 
 // import Ship from "./ship.js";

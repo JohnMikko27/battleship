@@ -16,7 +16,8 @@ const player = (name) => {
   return { getPlayerName, };
 };
 
-
+const p = player("hi");
+console.log(p.getPlayerName());
 
 
 const computer = () => {

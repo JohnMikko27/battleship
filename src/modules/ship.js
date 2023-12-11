@@ -3,6 +3,8 @@ export default function Ship(length) {
   let numOfHits = 0;
 
   const getLength = () => lengthOfShip;
+  // for testing purposes
+  const getNumOfHits = () => numOfHits;
 
   const hit = () => {
     numOfHits++;
@@ -10,5 +12,5 @@ export default function Ship(length) {
 
   const isSunk = () => (lengthOfShip - numOfHits) === 0;
 
-  return { hit, isSunk, getLength };
+  return { hit, isSunk, getLength, getNumOfHits };
 }
