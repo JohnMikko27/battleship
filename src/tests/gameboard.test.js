@@ -3,8 +3,8 @@
 // test incoming commands by asserting direct public side effects
 // test outgoing commands by "expect to send outgoing command messages"
 
-import Gameboard from "../modules/gameboard.js";
-import Ship from "../modules/ship.js";
+import Gameboard from "../modules/gameboard";
+import Ship from "../modules/ship";
 
 let gameboard;
 let ship;
