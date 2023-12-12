@@ -8,12 +8,14 @@
  */
 
 
-const player = (name) => {
+const player = (name, gameboard) => {
   const playerName = name;
-    
+  const board = gameboard;
+  
   const getPlayerName = () => playerName;
+  const getBoard = () => board;
 
-  return { getPlayerName, };
+  return { getPlayerName, getBoard};
 };
 
 const p = player("hi");
