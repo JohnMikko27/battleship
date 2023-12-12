@@ -16,6 +16,31 @@
  * 
  */
 
-// create a new game by creating players and gameboards
+// create a new game by creating players and gameboards (and probably ships also, just for now, while testing)
 // add the ships to the gameboards in predetermined coordinates
 // display both player's boards and render them using information from the gameboard factory
+
+import { player, computer } from "./player";
+import Gameboard from "./gameboard";
+import Ship from "./ship";
+
+const Game = (() => {
+  let player1;
+  let player2;
+  let gameboard1;
+  let gameboard2;
+
+  const getPlayer1 = () => player1;
+  const getPlayer2 = () => player2;
+  // will probably have to add name parameters later so that players can set their names
+  const createNewGame = () => {
+    gameboard1 = Gameboard();
+    gameboard2 = Gameboard();
+    player1 = player("John", gameboard1);
+    player2 = player("Michael", gameboard2);
+  };
+
+  return { createNewGame, getPlayer1, getPlayer2 };
+})();
+
+export default Game;
