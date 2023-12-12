@@ -8,16 +8,15 @@
  */
 
 
-const player = (name) => {
+const player = (name, gameboard) => {
   const playerName = name;
-    
+  const board = gameboard;
+  
   const getPlayerName = () => playerName;
+  const getBoard = () => board;
 
-  return { getPlayerName, };
+  return { getPlayerName, getBoard};
 };
-
-const p = player("hi");
-console.log(p.getPlayerName());
 
 // might need a placeAllships at random places function, or should this be in gameboard?
 const computer = () => {
@@ -50,8 +49,7 @@ const computer = () => {
   return { getShots, chooseRandomShot, };
 };
 
-const c = computer();
-console.log(c.chooseRandomShot());
+
 // console.log(c.chooseRandomShot());
 
 // console.log(c.getShots());
