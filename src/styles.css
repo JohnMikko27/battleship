@@ -1,3 +1,15 @@
-.blue {
-  color: green;
+#left {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  border: 2px solid black;
+  min-width: 10px;
+  min-height: 10px;
+  max-width: 10px;
 }
