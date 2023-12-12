@@ -19,3 +19,5 @@ test("test that AI is not shooting the same coords", () => {
   }
   expect(ai.getShots().length).toBeLessThan(101);
 });
+
+// add a test that checks that getShots function matches the chooseRandomShot function

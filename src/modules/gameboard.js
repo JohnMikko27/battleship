@@ -19,7 +19,7 @@ export default function Gameboard() {
   createGameboard();
 
   // need to add conditionals to check if ships go out of page
-  // also for rn, ships are only placed horizontally
+  // also for rn, ships are only placed horizontally and can overlap
   const placeShip = (row, column, ship) => {
     for (let i = 0; i < ship.getLength(); i++) {
       gameboard[row][column+i] = "o";

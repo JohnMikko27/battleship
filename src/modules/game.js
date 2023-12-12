@@ -20,7 +20,7 @@
 // add the ships to the gameboards in predetermined coordinates
 // display both player's boards and render them using information from the gameboard factory
 
-import { player, computer } from "./player";
+import player from "./player";
 import Gameboard from "./gameboard";
 import Ship from "./ship";
 
@@ -39,10 +39,6 @@ const Game = (() => {
     player1 = player("John", gameboard1);
     player2 = player("Michael", gameboard2);
   };
-
-  
-
-  // use git commit amend on the next one to change one of the commits
 
   return { createNewGame, getPlayer1, getPlayer2 };
 })();
