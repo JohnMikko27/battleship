@@ -7,21 +7,15 @@
  *   
  */
 
-
+// should i refactor computer? both computers and players will just be created from a player factory
+// and that player factory will have all the methods that it has right now
 const player = (name, gameboard) => {
   const playerName = name;
   const board = gameboard;
-  
+  const shots = [];
+
   const getPlayerName = () => playerName;
   const getBoard = () => board;
-
-  return { getPlayerName, getBoard};
-};
-
-// might need a placeAllships at random places function, or should this be in gameboard?
-const computer = () => {
-  const shots = [];
-  
   const getShots = () => shots;
 
   const hasShotBefore = (row, column) => {
@@ -46,11 +40,42 @@ const computer = () => {
     return returnValue;
   };
 
-  return { getShots, chooseRandomShot, };
+  return { getPlayerName, getBoard, getShots, chooseRandomShot, };
 };
+
+// might need a placeAllships at random places function, or should this be in gameboard?
+// const computer = () => {
+//   const shots = [];
+  
+//   const getShots = () => shots;
+
+//   const hasShotBefore = (row, column) => {
+//     let flag = false;
+//     shots.forEach((shot) => {
+//       if (shot[0] === row && shot[1] === column) {
+//         flag =  true;
+//       };
+//     });
+//     return flag;
+//   };
+  
+//   const chooseRandomShot = () => {
+//     let returnValue = null;
+//     const row = Math.round(Math.random() * 10);
+//     const column = Math.round(Math.random() * 10);
+    
+//     if (!hasShotBefore(row, column)) {
+//       shots.push([row, column]);
+//       returnValue = { row, column };
+//     }
+//     return returnValue;
+//   };
+
+//   return { getShots, chooseRandomShot, };
+// };
 
 
 // console.log(c.chooseRandomShot());
 
 // console.log(c.getShots());
-export {player, computer};
+export default player;

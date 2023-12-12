@@ -9,7 +9,7 @@
 
 .cell {
   border: 2px solid black;
-  min-width: 10px;
-  min-height: 10px;
-  max-width: 10px;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
 }

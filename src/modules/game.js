@@ -40,6 +40,10 @@ const Game = (() => {
     player2 = player("Michael", gameboard2);
   };
 
+  
+
+  // use git commit amend on the next one to change one of the commits
+
   return { createNewGame, getPlayer1, getPlayer2 };
 })();
 

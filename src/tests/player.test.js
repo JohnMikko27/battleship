@@ -1,5 +1,5 @@
 import Gameboard from "../modules/gameboard";
-import { player, computer } from "../modules/player";
+import player from "../modules/player";
 
 test("test player name", () => {
   const p = player("John");
@@ -13,7 +13,7 @@ test("test player board", () => {
 });
 
 test("test that AI is not shooting the same coords", () => {
-  const ai = computer();
+  const ai = player("ai");
   for (let i = 0; i < 101; i++) {
     ai.chooseRandomShot();
   }
