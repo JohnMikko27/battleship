@@ -37,7 +37,10 @@ export default function Gameboard() {
           obj.ship.hit();
         }
       }
-    } else missedAttacks.push([row, column]);
+    } else {
+      missedAttacks.push([row, column]);
+      gameboard[row][column] = "m";
+    }
   };
 
   const areAllShipsSunk = () => {

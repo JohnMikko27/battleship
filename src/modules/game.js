@@ -50,30 +50,24 @@ const Game = (() => {
   // but it will only receive attack, and display player gameboard if it's that person's turn
   // instead of adding an eventListener again
   // but i might need to keep it like this because display the board removes the eventlisteners
+
+  // i can refactor this to have a condtional for active player, then just declare cells before and 
+  // initialize cells inside the conditional depending on the active player
   const playGame = () => {
-    // add an eventListener for each cell in the opposing (not active player) board
-    if (activePlayer === player1) {
-      const cells = document.querySelectorAll("#right .cell");
-      cells.forEach(cell => cell.addEventListener("click", (e) => {
-        console.log(e.target.dataset.row, e.target.dataset.column);
-        opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
-        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
-        switchActivePlayer();
-        playGame();
-        // so now I can receiveAttack on the board and display it correctly,
-        // now, I need to remove the eventListeners and switch the activeplayers
-        // and then run playGame()
-      }));
-    } else if (activePlayer === player2) {
-      const cells = document.querySelectorAll("#left .cell");
-      cells.forEach(cell => cell.addEventListener("click", (e) => {
-        console.log(e.target.dataset.row, e.target.dataset.column);
-        opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
-        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
-        switchActivePlayer();
-        playGame();
-      }));
-    }
+    let cells;
+
+    if (activePlayer === player1) cells = document.querySelectorAll("#right .cell");
+    else cells = document.querySelectorAll("#left .cell");
+
+    cells.forEach(cell => cell.addEventListener("click", (e) => {
+      console.log(e.target.dataset.row, e.target.dataset.column);
+      opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
+      displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
+      
+      if (opposingPlayer.getBoard().areAllShipsSunk()) console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
+      switchActivePlayer();
+      playGame();
+    }));
   };
 
   return { createNewGame, getPlayer1, getPlayer2, playGame };
@@ -82,3 +76,6 @@ const Game = (() => {
 export default Game;
 
 // NOW I NEED TO CHECK IF ALL SHIPS ARE SUNK AND END THE GAME AND DISPLAY THE WINNER
+// maybe check after each attack and after each displayGameboard if all ships are sunk on the gameboard, 
+// if all ships are sunk on that gameboard, i can just return without doing playGame again
+// and then for now just do a console.log message to say who has won and i shouldn't be able to click anymore
