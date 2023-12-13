@@ -44,8 +44,9 @@ const Game = (() => {
     // player2.getBoard().receiveAttack(0,9);
     activePlayer = player1;
     opposingPlayer = player2;
+    // might need to display the boards here instead of calling somewhere else
   };
-
+  
   const switchActivePlayer = () => {
     if (activePlayer === player1) {
       activePlayer = player2;
@@ -55,14 +56,29 @@ const Game = (() => {
       opposingPlayer = player2;
     }
   };
+  createNewGame();
+  const ship1 = Ship(3);
+  const ship2 = Ship(3);
+  gameboard1.placeShip(0, 0, ship1);
+  gameboard1.placeShip(1, 0, ship2);
 
+
+  const ship3 = Ship(3);
+  const ship4 = Ship(3);
+  gameboard2.placeShip(0, 0, ship3);
+  gameboard2.placeShip(2, 0, ship4);
+
+  // maybe i can refactor this, i can add an eventListener for each cell, 
+  // but it will only receive attack, and display player gameboard if it's that person's turn
+  // instead of adding an eventListener again
+  // but i might need to keep it like this because display the board removes the eventlisteners
   const playGame = () => {
     // add an eventListener for each cell in the opposing (not active player) board
     if (activePlayer === player1) {
       const cells = document.querySelectorAll("#right .cell");
       cells.forEach(cell => cell.addEventListener("click", (e) => {
         console.log(e.target.dataset.row, e.target.dataset.column);
-        opposingPlayer.getBoard().receiveAttack(e.target.dataset.row, e.target.dataset.column);
+        opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
         displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
         switchActivePlayer();
         playGame();
@@ -74,11 +90,10 @@ const Game = (() => {
       const cells = document.querySelectorAll("#left .cell");
       cells.forEach(cell => cell.addEventListener("click", (e) => {
         console.log(e.target.dataset.row, e.target.dataset.column);
-        opposingPlayer.getBoard().receiveAttack(e.target.dataset.row, e.target.dataset.column);
+        opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
         displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
         switchActivePlayer();
         playGame();
-      
       }));
     }
   };
