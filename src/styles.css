@@ -3,6 +3,11 @@
   grid-template-columns: 1fr;
 }
 
+#gameboards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .row {
   display: flex;
 }
