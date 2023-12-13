@@ -19,25 +19,13 @@ export default function Gameboard() {
   createGameboard();
 
   // need to add conditionals to check if ships go out of page
-  // also for rn, ships are only placed horizontally and can overlap
+  // also for rn, ships are only placed horizontally
   const placeShip = (row, column, ship) => {
     for (let i = 0; i < ship.getLength(); i++) {
       gameboard[row][column+i] = "o";
     }
    
     shipsCoordinates.push({row, column, ship}); 
-  };
-
-  // for visualization purposes
-  const printGameboard = () => {
-    let result = "";
-    gameboard.forEach((row) => {
-      row.forEach((element) => {
-        result += element;
-      });
-      console.log(result);
-      result = "";
-    });
   };
 
   const receiveAttack = (row, column) => {
@@ -49,58 +37,20 @@ export default function Gameboard() {
           obj.ship.hit();
         }
       }
-    } else {
-      missedAttacks.push([row, column]);
-      gameboard[row][column] = "m";
-    }
+    } else missedAttacks.push([row, column]);
   };
 
   const areAllShipsSunk = () => {
     let shipsSunk = 0;
-    // see if you can change this to a reduce function
     shipsSunk = shipsCoordinates.reduce( (acc, cur) => {
       if (cur.ship.isSunk()) return acc + 1;
       return acc + 0;
     }, 0);
     
-    
-    // for (let i = 0; i < shipsCoordinates.length; i++) {
-    //   if (shipsCoordinates[i].ship.isSunk()) {
-    //     shipsSunk++;
-    //   }
-    // }
-    console.log(shipsSunk);
     return shipsSunk === shipsCoordinates.length;
   };
 
-  // I think I have to test placeship, receiveAttack, and areAllShips sunk 
-  // at least whichever functions will ultimately be used with other funtions like ship function
-  return { createGameboard, getGameboard, placeShip, printGameboard, receiveAttack, getMissedAttacks, areAllShipsSunk };
+  // I think I have to test placeship, receiveAttack, and a
+  return { createGameboard, getGameboard, placeShip, receiveAttack, getMissedAttacks, areAllShipsSunk };
 }
 
-// import Ship from "./ship.js";
-// const g = Gameboard();
-// const ship1 = Ship(3);
-// const ship2 = Ship(3);
-
-// g.placeShip(3, 3, ship1);
-// g.placeShip(4, 3, ship2);
-
-// g.printGameboard();
-// g.receiveAttack(3,4);
-// g.receiveAttack(3,3);
-// g.receiveAttack(3,5);
-// g.receiveAttack(3,6);
-// g.receiveAttack(6,9);
-
-// g.receiveAttack(4,3);
-// g.receiveAttack(4,4);
-// g.receiveAttack(4,5);
-
-
-// g.printGameboard();
-// console.log(ship1.isSunk());
-// console.log(ship2.isSunk());
-
-// console.log(g.getMissedAttacks());
-// console.log(g.areAllShipsSunk());
