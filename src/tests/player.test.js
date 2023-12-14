@@ -1,5 +1,5 @@
-import Gameboard from "../modules/gameboard";
-import player from "../modules/player";
+import Gameboard from "../modules/gameboard.js";
+import player from "../modules/player.js";
 
 test("test player name", () => {
   const p = player("John");

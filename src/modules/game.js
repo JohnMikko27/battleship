@@ -1,7 +1,7 @@
-import player from "./player";
-import Gameboard from "./gameboard";
-import Ship from "./ship";
-import displayPlayerGameboard from "./ui";
+import player from "./player.js";
+import Gameboard from "./gameboard.js";
+import Ship from "./ship.js";
+import displayPlayerGameboard from "./ui.js";
 
 const Game = (() => {
   let player1;
@@ -34,6 +34,7 @@ const Game = (() => {
       opposingPlayer = player2;
     }
   };
+
   createNewGame();
   const ship1 = Ship(3);
   const ship2 = Ship(3);
@@ -50,24 +51,33 @@ const Game = (() => {
   // but it will only receive attack, and display player gameboard if it's that person's turn
   // instead of adding an eventListener again
   // but i might need to keep it like this because display the board removes the eventlisteners
-
-  
   const playGame = () => {
     let cells;
 
-    if (activePlayer === player1) cells = document.querySelectorAll("#right .cell");
-    // for ai just add a shots variable in the else block
-    else cells = document.querySelectorAll("#left .cell");
+    if (activePlayer === player1) {
+      cells = document.querySelectorAll("#right .cell");
+      cells.forEach(cell => cell.addEventListener("click", (e) => {
+        console.log(e.target.dataset.row, e.target.dataset.column);
 
-    cells.forEach(cell => cell.addEventListener("click", (e) => {
-      console.log(e.target.dataset.row, e.target.dataset.column);
-      opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
+        opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
+        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
+
+        if (opposingPlayer.getBoard().areAllShipsSunk()) console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
+        switchActivePlayer();
+        playGame();
+      }));
+    }
+
+    // so chooseRandomShot can go outside the board, gotta fix that
+    else {
+      cells = document.querySelectorAll("#left .cell");
+      const shot = activePlayer.chooseRandomShot();
+      opposingPlayer.getBoard().receiveAttack(shot[0], shot[1]);
       displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
-
-      if (opposingPlayer.getBoard().areAllShipsSunk()) console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
       switchActivePlayer();
       playGame();
-    }));
+    }
+
   };
 
   return { createNewGame, getPlayer1, getPlayer2, playGame };

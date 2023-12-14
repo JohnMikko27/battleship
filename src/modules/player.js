@@ -35,12 +35,12 @@ const player = (name, gameboard) => {
     
     const ship1 = Ship(4);
     const ship2 = Ship(4);
-    const ship3 = Ship(4);
+    // const ship3 = Ship(4);
 
     const shipCoords = [
       {row: 1, column: 3, ship: ship1}, 
       {row: 2, column: 4, ship: ship2}, 
-      {row: 3, column: 5, ship: ship3}, 
+      // {row: 3, column: 5, ship: ship3}, 
     ];
     return shipCoords;
   };
