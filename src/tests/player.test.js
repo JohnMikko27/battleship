@@ -20,4 +20,27 @@ test("test that AI is not shooting the same coords", () => {
   expect(ai.getShots().length).toBeLessThan(101);
 });
 
-// add a test that checks that getShots function matches the chooseRandomShot function
+test("test random ship placements", () => {
+  const board = Gameboard();
+  const ai = player("ai", board);
+  let flag = true;
+  // what do i want it to do? 
+  // i want it to return an array of objects; object = {row, column, ship}
+  // i want to check and make sure that (for right now) they are in different rows
+  // and that the ship doesn't go out of bounds; column + ship.getLength() < 10
+  // maybe i can split into two tests, i can check first if the rows and column + ships don't go out of bounds
+  const shipsCoordinates = ai.getRandomShipPlacements();
+  shipsCoordinates.forEach(obj => {
+    if (obj.row > 10 || (obj.column + obj.ship.getLength() > 10)) flag = false;
+  });
+  expect(flag).toBeTruthy();
+});
+
+test("test chooseRandomShot matches getShots", () => {
+  const board = Gameboard();
+  const ai = player("ai", board);
+  const shot = ai.chooseRandomShot();
+  console.log(shot);
+  console.log(ai.getShots());
+  expect(ai.getShots()[0]).toEqual(shot);
+});

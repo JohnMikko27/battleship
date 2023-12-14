@@ -53,7 +53,6 @@ export default function Gameboard() {
     return shipsSunk === shipsCoordinates.length;
   };
 
-  // I think I have to test placeship, receiveAttack, and a
   return { createGameboard, getGameboard, placeShip, receiveAttack, getMissedAttacks, areAllShipsSunk };
 }
 
