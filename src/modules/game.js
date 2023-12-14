@@ -60,31 +60,31 @@ const Game = (() => {
       cells.forEach(cell => cell.addEventListener("click", (e) => {
         console.log(e.target.dataset.row, e.target.dataset.column);
 
-        // to make sure that we can't choose the same coordinates
-        // i should have a function that checks player1.gameboard and gets all the coordinates that have been shot
-        // if the e.dataset.row/col match that, then just run playGame again (add a display later)
-        // should i create a coordinatesShot array in gameboard? to keep track of all the cooridinates that have been shot
-        // or just a function hasShotCoords before that just checks the gameboard's element at that coord
-        // if it's "m" or "x" that means it has been shot before 
         if (opposingPlayer.getBoard().hasShotCoordsBefore(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10))) {
-          console.log("has shot their before");
+          console.log("has shot there before");
           return;
         }
-
+        
         opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
-        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
+        if (opposingPlayer.getBoard().areAllShipsSunk()) {
+          console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
+          // add some end game stuff
+        }
 
-        if (opposingPlayer.getBoard().areAllShipsSunk()) console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
+        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
         switchActivePlayer();
         playGame();
       }));
     }
 
-    // so chooseRandomShot can go outside the board, gotta fix that
     else {
       cells = document.querySelectorAll("#left .cell");
       const shot = activePlayer.chooseRandomShot();
       opposingPlayer.getBoard().receiveAttack(shot[0], shot[1]);
+      if (opposingPlayer.getBoard().areAllShipsSunk()) {
+        console.log(`all ships are sunk for playermikko ${opposingPlayer.getPlayerName()}`);
+        // add some end game stuff
+      }
       displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
       switchActivePlayer();
       playGame();
