@@ -21,8 +21,8 @@ const player = (name, gameboard) => {
   
   const chooseRandomShot = () => {
     let returnValue;
-    const row = Math.round(Math.random() * 10);
-    const column = Math.round(Math.random() * 10);
+    const row = Math.floor(Math.random() * 10);
+    const column = Math.floor(Math.random() * 10);
     
     if (!hasShotCoordsBefore(row, column)) {
       shots.push([row, column]);
