@@ -27,6 +27,8 @@ const player = (name, gameboard) => {
     if (!hasShotCoordsBefore(row, column)) {
       shots.push([row, column]);
       returnValue = [row, column];
+    } else if (hasShotCoordsBefore(row, column)) {
+      returnValue = chooseRandomShot();
     }
     return returnValue;
   };

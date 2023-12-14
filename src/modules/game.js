@@ -54,10 +54,22 @@ const Game = (() => {
   const playGame = () => {
     let cells;
 
+    
     if (activePlayer === player1) {
       cells = document.querySelectorAll("#right .cell");
       cells.forEach(cell => cell.addEventListener("click", (e) => {
         console.log(e.target.dataset.row, e.target.dataset.column);
+
+        // to make sure that we can't choose the same coordinates
+        // i should have a function that checks player1.gameboard and gets all the coordinates that have been shot
+        // if the e.dataset.row/col match that, then just run playGame again (add a display later)
+        // should i create a coordinatesShot array in gameboard? to keep track of all the cooridinates that have been shot
+        // or just a function hasShotCoords before that just checks the gameboard's element at that coord
+        // if it's "m" or "x" that means it has been shot before 
+        if (opposingPlayer.getBoard().hasShotCoordsBefore(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10))) {
+          console.log("has shot their before");
+          return;
+        }
 
         opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
         displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());

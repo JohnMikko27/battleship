@@ -45,3 +45,10 @@ test("test if all ships sunk", () => {
   gameboard.receiveAttack(1,5);
   expect(gameboard.areAllShipsSunk()).toBeTruthy();
 });
+
+// maybe change this name
+test("test hasShotCoordsBefore", () => {
+  // it should return true or false
+  gameboard.receiveAttack(9,9);
+  expect(gameboard.hasShotCoordsBefore(9,9)).toBeTruthy();
+});

@@ -53,6 +53,12 @@ export default function Gameboard() {
     return shipsSunk === shipsCoordinates.length;
   };
 
-  return { createGameboard, getGameboard, placeShip, receiveAttack, getMissedAttacks, areAllShipsSunk };
+  const hasShotCoordsBefore = (row, column) => {
+    let flag = false;
+    if (gameboard[row][column] === "m" || gameboard[row][column] === "x") flag = true;
+    return flag;
+  };
+
+  return { createGameboard, getGameboard, placeShip, receiveAttack, getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore };
 }
 
