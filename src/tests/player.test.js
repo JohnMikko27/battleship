@@ -21,18 +21,18 @@ test("test player board", () => {
 //   expect(ai.getShots().length).toBeLessThan(101);
 // });
 
-test("test random ship placements", () => {
-  const board = Gameboard();
-  const ai = player("ai", board);
-  let flag = true;
+// test("test random ship placements", () => {
+//   const board = Gameboard();
+//   const ai = player("ai", board);
+//   let flag = true;
   
-  const shipsCoordinates = ai.getRandomShipPlacements();
-  console.log(shipsCoordinates);
-  shipsCoordinates.forEach(obj => {
-    if (obj.row > 10 || (obj.column + obj.ship.getLength() > 10)) flag = false;
-  });
-  expect(flag).toBeTruthy();
-});
+//   const shipsCoordinates = ai.getRandomShipPlacements();
+//   console.log(shipsCoordinates);
+//   shipsCoordinates.forEach(obj => {
+//     if (obj.row > 10 || (obj.column + obj.ship.getLength() > 10)) flag = false;
+//   });
+//   expect(flag).toBeTruthy();
+// });
 
 test("test chooseRandomShot matches getShots", () => {
   const board = Gameboard();

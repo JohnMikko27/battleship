@@ -37,8 +37,9 @@ const Gameboard = () => {
       // "o" means there is a ship/part of a ship on those coords
       gameboard[row][column+i] = "o";
     }
-   
+    console.log(row, column, ship.getLength());
     shipsCoordinates.push({row, column, ship}); 
+    console.log(shipsCoordinates);
   };
 
   const receiveAttack = (row, column) => {
@@ -72,6 +73,8 @@ const Gameboard = () => {
     return flag;
   };
 
+  // place ai ships is overlapping
+  // shihps are overlapping, gotta step through code
   const getRandomShipPlacements = () => {
     const shipCoords = [];
     let i = 0;
@@ -79,35 +82,38 @@ const Gameboard = () => {
       let flag = false;
       const row = Math.floor(Math.random() * 10);
       const column = Math.floor(Math.random() * 10);
-      const ship = Ship(i+1);
+      const ship = Ship(i+2);
       // maybe check if column + ship length is greater than 10 here already so we can just continue
       shipCoords.forEach(el => {
-        // this doesn't check for the whole ship 
-        // bc it only checks for that specific column coordinate and it doesn't check the whole ship
-        // so we need to compare the new column + new ship length 
-        // with each ship col + ship length in ship Coords
-        if (row === el.row && column >= el.column && column < el.column + el.ship.getLength()) {
+        if (row === el.row && (column >= el.column && column < (el.column + el.ship.getLength()))) {
           flag = true;
         } else if (row === el.row) {
           for (let k = 0; k < ship.getLength(); k++) {
             const newColumn = column;
-            if ((newColumn + 1 >= el.column) && (newColumn + 1 < el.column + el.ship.getLength())) flag = true;
+            if (((newColumn + k + 1) >= el.column) && ((newColumn + k + 1) < (el.column + el.ship.getLength()))) flag = true;
           }
         } 
       });
       if (flag || column + ship.getLength() > 10) {
         flag = false;
-        // eslint-disable-next-line no-continue
-        continue;
+        // i++;
+      } else {
+        shipCoords.push({row, column, ship});
+        i++;
       }
-      shipCoords.push({row, column, ship});
-      i++;
+     
     }
+    // console.log(shipCoords);
     return shipCoords;
   };
 
+  const placeAiShips = () => {
+    const shipArr = getRandomShipPlacements();
+    shipArr.forEach(obj => placeShip(obj.row, obj.column, obj.ship));
+  };
+
   return { createGameboard, getGameboard, placeShip, receiveAttack, 
-    getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore, getRandomShipPlacements };
+    getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore, placeAiShips };
 };
 
 export default Gameboard;

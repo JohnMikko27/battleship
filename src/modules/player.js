@@ -33,7 +33,7 @@ const player = (name, gameboard) => {
 
   
 
-  return { getPlayerName, getBoard, getShots, chooseRandomShot, getRandomShipPlacements };
+  return { getPlayerName, getBoard, getShots, chooseRandomShot };
 };
 
 

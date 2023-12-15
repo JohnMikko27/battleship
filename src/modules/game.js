@@ -42,10 +42,7 @@ const Game = (() => {
   gameboard1.placeShip(1, 0, ship2);
 
 
-  const ship3 = Ship(3);
-  const ship4 = Ship(3);
-  gameboard2.placeShip(0, 0, ship3);
-  gameboard2.placeShip(2, 0, ship4);
+  gameboard2.placeAiShips();
 
   // maybe i can refactor this, i can add an eventListener for each cell, 
   // but it will only receive attack, and display player gameboard if it's that person's turn
