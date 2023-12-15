@@ -1,4 +1,6 @@
-export default function Gameboard() {
+import Ship from "./ship.js";
+
+const Gameboard = () => {
   const gameboard = [];
   const shipsCoordinates = [];
   const missedAttacks = [];
@@ -18,10 +20,21 @@ export default function Gameboard() {
   };
   createGameboard();
 
-  // need to add conditionals to check if ships go out of page
-  // also for rn, ships are only placed horizontally
+  
+  // how do i make it so that ships won't overlap and ships won't go out of board?
+  // to make ships not overlap, since we're only doing things horizontally, 
+  // if row is in shipsCoordinates check if column is greater than that corresponding column and less than column + ship length
+  // if it is then that is an invalid row/column
+  // to make ships not go out of board, 
+  // if column (since ships are only going horizontally) + ship length > 10 (which is the length of board) 
+  // then say something about how it's invalid
+  // and what do i do if i do get row/column/ship length that are invalid? 
+  // maybe worry about this later, because it's not that urgent
+  // maybe refactor it in a way where only valid coordinates are given?
+  // maybe this is a function for drag and drop?
   const placeShip = (row, column, ship) => {
     for (let i = 0; i < ship.getLength(); i++) {
+      // "o" means there is a ship/part of a ship on those coords
       gameboard[row][column+i] = "o";
     }
    
@@ -59,6 +72,42 @@ export default function Gameboard() {
     return flag;
   };
 
-  return { createGameboard, getGameboard, placeShip, receiveAttack, getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore };
-}
+  const getRandomShipPlacements = () => {
+    const shipCoords = [];
+    let i = 0;
+    while (i < 4) {
+      let flag = false;
+      const row = Math.floor(Math.random() * 10);
+      const column = Math.floor(Math.random() * 10);
+      const ship = Ship(i+1);
+      // maybe check if column + ship length is greater than 10 here already so we can just continue
+      shipCoords.forEach(el => {
+        // this doesn't check for the whole ship 
+        // bc it only checks for that specific column coordinate and it doesn't check the whole ship
+        // so we need to compare the new column + new ship length 
+        // with each ship col + ship length in ship Coords
+        if (row === el.row && column >= el.column && column < el.column + el.ship.getLength()) {
+          flag = true;
+        } else if (row === el.row) {
+          for (let k = 0; k < ship.getLength(); k++) {
+            const newColumn = column;
+            if ((newColumn + 1 >= el.column) && (newColumn + 1 < el.column + el.ship.getLength())) flag = true;
+          }
+        } 
+      });
+      if (flag || column + ship.getLength() > 10) {
+        flag = false;
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+      shipCoords.push({row, column, ship});
+      i++;
+    }
+    return shipCoords;
+  };
 
+  return { createGameboard, getGameboard, placeShip, receiveAttack, 
+    getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore, getRandomShipPlacements };
+};
+
+export default Gameboard;

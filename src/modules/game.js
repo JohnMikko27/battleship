@@ -52,11 +52,8 @@ const Game = (() => {
   // instead of adding an eventListener again
   // but i might need to keep it like this because display the board removes the eventlisteners
   const playGame = () => {
-    let cells;
-
-    
     if (activePlayer === player1) {
-      cells = document.querySelectorAll("#right .cell");
+      const cells = document.querySelectorAll("#right .cell");
       cells.forEach(cell => cell.addEventListener("click", (e) => {
         console.log(e.target.dataset.row, e.target.dataset.column);
 
@@ -66,6 +63,7 @@ const Game = (() => {
         }
         
         opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
+
         if (opposingPlayer.getBoard().areAllShipsSunk()) {
           console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
           // add some end game stuff
@@ -75,10 +73,9 @@ const Game = (() => {
         switchActivePlayer();
         playGame();
       }));
-    }
-
+    } 
+    
     else {
-      cells = document.querySelectorAll("#left .cell");
       const shot = activePlayer.chooseRandomShot();
       opposingPlayer.getBoard().receiveAttack(shot[0], shot[1]);
       if (opposingPlayer.getBoard().areAllShipsSunk()) {
@@ -89,7 +86,6 @@ const Game = (() => {
       switchActivePlayer();
       playGame();
     }
-
   };
 
   return { createNewGame, getPlayer1, getPlayer2, playGame };

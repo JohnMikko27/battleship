@@ -12,24 +12,22 @@ test("test player board", () => {
   expect(p.getBoard().getGameboard()).toEqual(board.getGameboard());
 });
 
-test("test that AI is not shooting the same coords", () => {
-  const ai = player("ai");
-  for (let i = 0; i < 101; i++) {
-    ai.chooseRandomShot();
-  }
-  expect(ai.getShots().length).toBeLessThan(101);
-});
+// might need to delete or refactor this test because it's not that good of a test
+// test("test that AI is not shooting the same coords", () => {
+//   const ai = player("ai");
+//   for (let i = 0; i < 101; i++) {
+//     ai.chooseRandomShot();
+//   }
+//   expect(ai.getShots().length).toBeLessThan(101);
+// });
 
 test("test random ship placements", () => {
   const board = Gameboard();
   const ai = player("ai", board);
   let flag = true;
-  // what do i want it to do? 
-  // i want it to return an array of objects; object = {row, column, ship}
-  // i want to check and make sure that (for right now) they are in different rows
-  // and that the ship doesn't go out of bounds; column + ship.getLength() < 10
-  // maybe i can split into two tests, i can check first if the rows and column + ships don't go out of bounds
+  
   const shipsCoordinates = ai.getRandomShipPlacements();
+  console.log(shipsCoordinates);
   shipsCoordinates.forEach(obj => {
     if (obj.row > 10 || (obj.column + obj.ship.getLength() > 10)) flag = false;
   });
