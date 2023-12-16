@@ -31,10 +31,7 @@ const player = (name, gameboard) => {
     return returnValue;
   };
 
-  
-
   return { getPlayerName, getBoard, getShots, chooseRandomShot };
 };
-
 
 export default player;

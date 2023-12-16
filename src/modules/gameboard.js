@@ -19,7 +19,6 @@ const Gameboard = () => {
     }
   };
   createGameboard();
-
   
   // how do i make it so that ships won't overlap and ships won't go out of board?
   // to make ships not overlap, since we're only doing things horizontally, 
@@ -37,9 +36,7 @@ const Gameboard = () => {
       // "o" means there is a ship/part of a ship on those coords
       gameboard[row][column+i] = "o";
     }
-    console.log(row, column, ship.getLength());
     shipsCoordinates.push({row, column, ship}); 
-    console.log(shipsCoordinates);
   };
 
   const receiveAttack = (row, column) => {
@@ -73,8 +70,6 @@ const Gameboard = () => {
     return flag;
   };
 
-  // place ai ships is overlapping
-  // shihps are overlapping, gotta step through code
   const getRandomShipPlacements = () => {
     const shipCoords = [];
     let i = 0;
@@ -101,9 +96,7 @@ const Gameboard = () => {
         shipCoords.push({row, column, ship});
         i++;
       }
-     
     }
-    // console.log(shipCoords);
     return shipCoords;
   };
 

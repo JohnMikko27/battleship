@@ -11,18 +11,27 @@ const Game = (() => {
   let activePlayer;
   let opposingPlayer;
 
-  const getPlayer1 = () => player1;
-  const getPlayer2 = () => player2;
-  // will probably have to add name parameters later so that players can set their names
   const createNewGame = () => {
     gameboard1 = Gameboard();
     gameboard2 = Gameboard();
     player1 = player("John", gameboard1);
     player2 = player("ai", gameboard2);
-    // player2.getBoard().receiveAttack(0,9);
     activePlayer = player1;
     opposingPlayer = player2;
-    // might need to display the boards here instead of calling somewhere else
+
+    // test
+    const ship1 = Ship(3);
+    const ship2 = Ship(3);
+    gameboard1.placeShip(0, 0, ship1);
+    gameboard1.placeShip(1, 0, ship2);
+    gameboard2.placeAiShips();
+
+    displayPlayerGameboard(player1, gameboard1);
+    displayPlayerGameboard(player2, gameboard2);
+
+    const startGame = document.querySelector("button");
+    // eslint-disable-next-line no-use-before-define
+    startGame.addEventListener("click", playGame);
   };
   
   const switchActivePlayer = () => {
@@ -35,19 +44,6 @@ const Game = (() => {
     }
   };
 
-  createNewGame();
-  const ship1 = Ship(3);
-  const ship2 = Ship(3);
-  gameboard1.placeShip(0, 0, ship1);
-  gameboard1.placeShip(1, 0, ship2);
-
-
-  gameboard2.placeAiShips();
-
-  // maybe i can refactor this, i can add an eventListener for each cell, 
-  // but it will only receive attack, and display player gameboard if it's that person's turn
-  // instead of adding an eventListener again
-  // but i might need to keep it like this because display the board removes the eventlisteners
   const playGame = () => {
     if (activePlayer === player1) {
       const cells = document.querySelectorAll("#right .cell");
@@ -85,14 +81,12 @@ const Game = (() => {
     }
   };
 
-  return { createNewGame, getPlayer1, getPlayer2, playGame };
+  return { createNewGame, playGame };
 })();
 
 export default Game;
 
-// now i have a both boards working with the receiveAttack, placeShip, and allShipsSunk functions
-// now i need to make ai place its ships randomly
-// i probably also need to refactor placeships and make sure that it only takes valid coordinates
-// how do i make placeShips know if its a valid coordinate
+// maybe when i implement drag and drop, i can have a function that checks if the ship will overlap/go out of board
+// if that's true then dont' place else place it
 // maybe if coordinates is in ships coordinates, then return???
 // after i get ai to place its ships randomly, i need to check the gameboard functions
