@@ -1,7 +1,7 @@
 import player from "./player.js";
 import Gameboard from "./gameboard.js";
 import Ship from "./ship.js";
-import displayPlayerGameboard from "./ui.js";
+import { displayPlayerGameboard, displayEndGameDisplay} from "./ui.js";
 
 const Game = (() => {
   let player1;
@@ -47,7 +47,8 @@ const Game = (() => {
   const playGame = () => {
     if (activePlayer === player1) {
       const cells = document.querySelectorAll("#right .cell");
-      cells.forEach(cell => cell.addEventListener("click", (e) => {
+      // eslint-disable-next-line prefer-arrow-callback
+      cells.forEach(cell => cell.addEventListener("click", function eventHandler(e) {
         console.log(e.target.dataset.row, e.target.dataset.column);
 
         if (opposingPlayer.getBoard().hasShotCoordsBefore(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10))) {
@@ -56,13 +57,18 @@ const Game = (() => {
         }
         
         opposingPlayer.getBoard().receiveAttack(parseInt(e.target.dataset.row, 10), parseInt(e.target.dataset.column, 10));
+        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
 
         if (opposingPlayer.getBoard().areAllShipsSunk()) {
           console.log(`all ships are sunk for player ${opposingPlayer.getPlayerName()}`);
           // add some end game stuff
+          displayEndGameDisplay(activePlayer.getPlayerName(), createNewGame);
+          // eslint-disable-next-line no-shadow
+          cells.forEach(cell => cell.removeEventListener("click", eventHandler));
+          return;
         }
-
-        displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
+        
+        // displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
         switchActivePlayer();
         playGame();
       }));
@@ -71,11 +77,13 @@ const Game = (() => {
     else {
       const shot = activePlayer.chooseRandomShot();
       opposingPlayer.getBoard().receiveAttack(shot[0], shot[1]);
+      displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
+    
       if (opposingPlayer.getBoard().areAllShipsSunk()) {
         console.log(`all ships are sunk for playermikko ${opposingPlayer.getPlayerName()}`);
         // add some end game stuff
+        displayEndGameDisplay(activePlayer.getPlayerName(), createNewGame);
       }
-      displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
       switchActivePlayer();
       playGame();
     }
@@ -90,3 +98,13 @@ export default Game;
 // if that's true then dont' place else place it
 // maybe if coordinates is in ships coordinates, then return???
 // after i get ai to place its ships randomly, i need to check the gameboard functions
+// now i can create a new game on load, then start a game if i hit button, then i can end the game after someone wins
+
+// so the plan is to intially display both player and ai boards, 
+// then have a start game button where they can start game
+// but before that the player has preplaced ships on their board and can drag and drop them to anywhere they want
+// so i need to be able to implement drag and drop
+// i can create a isValidCoordinates function that checks if a coordinate is valid, 
+// i can check if it's valid by using the conditionals in getRandomShipPlacements function
+// if it is valid,
+// then i need to place the ship at that coordinate
