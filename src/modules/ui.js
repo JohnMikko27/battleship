@@ -26,5 +26,25 @@ const displayPlayerGameboard = (player, gameboard) => {
   }
 };
 
-export default displayPlayerGameboard;
-// export { displayPlayerGameboard, };
+const createEndGameDisplay = (winner, cb) => {
+  const displayContainer = document.createElement("div");
+  const winnerDisplay = document.createElement("div");
+  const playAgain = document.createElement("button");
+
+  winnerDisplay.textContent = `${winner} has won!`;
+  playAgain.textContent = "Play Again";
+  playAgain.addEventListener("click", cb);
+
+  displayContainer.appendChild(winnerDisplay);
+  displayContainer.appendChild(playAgain);
+
+  return displayContainer;
+};
+
+const displayEndGameDisplay = (winner, cb) => {
+  const body = document.querySelector("body");
+  const endGameDisplay = createEndGameDisplay(winner, cb);
+  body.appendChild(endGameDisplay);
+};
+
+export { displayPlayerGameboard, displayEndGameDisplay};
