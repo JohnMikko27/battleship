@@ -39,6 +39,8 @@ const createEndGameDisplay = (winner, cb) => {
   playAgain.textContent = "Play Again";
   playAgain.addEventListener("click", cb);
 
+  displayContainer.setAttribute("id", "end-game-display");
+
   displayContainer.appendChild(winnerDisplay);
   displayContainer.appendChild(playAgain);
 
@@ -48,6 +50,8 @@ const createEndGameDisplay = (winner, cb) => {
 const displayEndGameDisplay = (winner, cb) => {
   const body = document.querySelector("body");
   const endGameDisplay = createEndGameDisplay(winner, cb);
+  const lastChild = document.querySelector("div:last-child");
+  body.removeChild(lastChild);
   body.appendChild(endGameDisplay);
 };
 
@@ -103,48 +107,48 @@ const displayModal = (gameboard) => {
   document.body.appendChild(modal);
 };
 
-const dragStartEventHandler = (e, gameboard) => {
-  // e.dataTransfer.setData('text/plain', )
-  // maybe use e.dataTransfer.setData to transfer the data of the length the ship??
-  // maybe use that function to get the length of the ship, and maybe have cell.addEventListener in display function
-  // so when dragStarts, we just call this function and it will return the correct length of the ship
-  // maybe we could have a global variable and it will just change that global variable
-  // so that when they start dragging the ship, we can have the correct length of the ship being dragged
-  console.log("drag start");
-  console.log(e.target.dataset.row, e.target.dataset.column);
-  const row = parseInt(e.target.dataset.row, 10);
-  const column = parseInt(e.target.dataset.column, 10);
-  for (let i = 0; i < gameboard.getShipsCoordinates().length; i++) {
-    if (gameboard.getShipsCoordinates()[i].row === row && (column >= gameboard.getShipsCoordinates()[i].column && (column < (gameboard.getShipsCoordinates()[i].column + gameboard.getShipsCoordinates()[i].ship.getLength())))) {
-      shipLength = gameboard.getShipsCoordinates()[i].ship.getLength();
-      console.log(shipLength);
-      e.dataTransfer.setData("text/plain", e.target.textContent);
-    }
-  }
-};
+// const dragStartEventHandler = (e, gameboard) => {
+//   // e.dataTransfer.setData('text/plain', )
+//   // maybe use e.dataTransfer.setData to transfer the data of the length the ship??
+//   // maybe use that function to get the length of the ship, and maybe have cell.addEventListener in display function
+//   // so when dragStarts, we just call this function and it will return the correct length of the ship
+//   // maybe we could have a global variable and it will just change that global variable
+//   // so that when they start dragging the ship, we can have the correct length of the ship being dragged
+//   console.log("drag start");
+//   console.log(e.target.dataset.row, e.target.dataset.column);
+//   const row = parseInt(e.target.dataset.row, 10);
+//   const column = parseInt(e.target.dataset.column, 10);
+//   for (let i = 0; i < gameboard.getShipsCoordinates().length; i++) {
+//     if (gameboard.getShipsCoordinates()[i].row === row && (column >= gameboard.getShipsCoordinates()[i].column && (column < (gameboard.getShipsCoordinates()[i].column + gameboard.getShipsCoordinates()[i].ship.getLength())))) {
+//       shipLength = gameboard.getShipsCoordinates()[i].ship.getLength();
+//       console.log(shipLength);
+//       e.dataTransfer.setData("text/plain", e.target.textContent);
+//     }
+//   }
+// };
 
-const dragEventHandler = (e) => {
-  console.log("dragged");
-  // maybe refactor displayGamboard function
-  // i don't necessarily need to loop through each cell on the board, 
-  // but if i don't loop through each cell on the board, 
-  // then i would have to already have a 10x10 board, 
-  // and i would just place/style individual cells that are ship parts
+// const dragEventHandler = (e) => {
+//   console.log("dragged");
+//   // maybe refactor displayGamboard function
+//   // i don't necessarily need to loop through each cell on the board, 
+//   // but if i don't loop through each cell on the board, 
+//   // then i would have to already have a 10x10 board, 
+//   // and i would just place/style individual cells that are ship parts
 
-  // or maybe for each individual cell representing a part of a ship, 
-  // add a class like ship.${shiplength} to each of those individual parts, 
-  // then when we drag start, 
-  // we could select all those individual ship parts (maybe?) and use the dataTransfer.setData function on it?
+//   // or maybe for each individual cell representing a part of a ship, 
+//   // add a class like ship.${shiplength} to each of those individual parts, 
+//   // then when we drag start, 
+//   // we could select all those individual ship parts (maybe?) and use the dataTransfer.setData function on it?
 
-  // or maybe we could get the default image shown and multiply it or something
-};
+//   // or maybe we could get the default image shown and multiply it or something
+// };
 
-const dropEventHandler = (e) => {
-  e.preventDefault();
-  console.log("dropped");
-  const data = e.dataTransfer.getData("text/plain");
-  e.target.textContent = data;
-};
+// const dropEventHandler = (e) => {
+//   e.preventDefault();
+//   console.log("dropped");
+//   const data = e.dataTransfer.getData("text/plain");
+//   e.target.textContent = data;
+// };
 
 export { displayPlayerGameboard, displayEndGameDisplay, displayModal };
 
