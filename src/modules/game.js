@@ -14,7 +14,7 @@ const Game = (() => {
   const createNewGame = () => {
     gameboard1 = Gameboard();
     gameboard2 = Gameboard();
-    player1 = player("John", gameboard1);
+    player1 = player("Mikko", gameboard1);
     player2 = player("ai", gameboard2);
     activePlayer = player1;
     opposingPlayer = player2;

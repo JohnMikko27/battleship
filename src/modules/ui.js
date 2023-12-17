@@ -37,7 +37,12 @@ const createEndGameDisplay = (winner, cb) => {
 
   winnerDisplay.textContent = `${winner} has won!`;
   playAgain.textContent = "Play Again";
-  playAgain.addEventListener("click", cb);
+  playAgain.addEventListener("click", () => {
+    cb();
+    const lastChild = document.querySelector("body > div:last-child");
+    document.body.removeChild(lastChild);
+    document.body.classList.remove("blur");
+  });
 
   displayContainer.setAttribute("id", "end-game-display");
 
@@ -50,8 +55,9 @@ const createEndGameDisplay = (winner, cb) => {
 const displayEndGameDisplay = (winner, cb) => {
   const body = document.querySelector("body");
   const endGameDisplay = createEndGameDisplay(winner, cb);
-  const lastChild = document.querySelector("div:last-child");
-  body.removeChild(lastChild);
+  
+  body.classList.add("blur");
+  endGameDisplay.classList.remove("blur");
   body.appendChild(endGameDisplay);
 };
 
