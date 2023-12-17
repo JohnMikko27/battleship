@@ -1,3 +1,31 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#title {
+  width: 100vw;
+  background-color: gray;
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#start-game-button {
+  height: 2rem;
+  width: 6rem;
+  border-radius: 12px;
+}
+
 #left {
   display: grid;
   grid-template-columns: 1fr;
@@ -6,6 +34,7 @@
 #gameboards-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-items: center;
 }
 
 .row {
@@ -16,10 +45,29 @@
   border: 2px solid black;
   min-width: 30px;
   min-height: 30px;
+  max-height: 30px;
+  max-width: 30px;
+}
+
+/*
+ * Modal
+ */
+
+#modal {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#ships-container {
+  display: grid;
+  gap: 0.5rem;
 }
 
 .ship {
   display: flex;
   background-color: gray;
   width: min-content;
+  height: min-content;
 }

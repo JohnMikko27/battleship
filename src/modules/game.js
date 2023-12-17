@@ -32,9 +32,9 @@ const Game = (() => {
 
     gameboard2.placeAiShips();
 
-    // displayPlayerGameboard(player1, gameboard1);
-    // displayPlayerGameboard(player2, gameboard2);
-    displayModal(gameboard1);
+    displayPlayerGameboard(player1, gameboard1);
+    displayPlayerGameboard(player2, gameboard2);
+    // displayModal(gameboard1);
     const startGame = document.querySelector("button");
     startGame.addEventListener("click", playGame);
   };
