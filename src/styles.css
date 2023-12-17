@@ -16,5 +16,10 @@
   border: 2px solid black;
   min-width: 30px;
   min-height: 30px;
-  max-width: 30px;
+}
+
+.ship {
+  display: flex;
+  background-color: gray;
+  width: min-content;
 }

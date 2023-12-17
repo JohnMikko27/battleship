@@ -21,6 +21,7 @@
         "semi": ["warn", "always"],
         "import/extensions": "off",
         "no-undef": "off",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn", 
+        "no-use-before-define": "off"
     }
 }

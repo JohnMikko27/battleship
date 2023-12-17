@@ -6,7 +6,7 @@ const Gameboard = () => {
   const missedAttacks = [];
 
   const getGameboard = () => gameboard;
-
+  const getShipsCoordinates = () => shipsCoordinates;
   const getMissedAttacks = () => missedAttacks;
 
   const createGameboard = () => {
@@ -106,7 +106,7 @@ const Gameboard = () => {
   };
 
   return { createGameboard, getGameboard, placeShip, receiveAttack, 
-    getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore, placeAiShips };
+    getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore, placeAiShips, getShipsCoordinates };
 };
 
 export default Gameboard;

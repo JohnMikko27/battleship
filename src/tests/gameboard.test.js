@@ -52,3 +52,5 @@ test("test hasShotCoordsBefore", () => {
   gameboard.receiveAttack(9,9);
   expect(gameboard.hasShotCoordsBefore(9,9)).toBeTruthy();
 });
+
+// add an isValidCoords function

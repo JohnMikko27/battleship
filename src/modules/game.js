@@ -1,7 +1,7 @@
 import player from "./player.js";
 import Gameboard from "./gameboard.js";
 import Ship from "./ship.js";
-import { displayPlayerGameboard, displayEndGameDisplay} from "./ui.js";
+import { displayPlayerGameboard, displayEndGameDisplay, displayModal } from "./ui.js";
 
 const Game = (() => {
   let player1;
@@ -20,17 +20,22 @@ const Game = (() => {
     opposingPlayer = player2;
 
     // test
-    const ship1 = Ship(3);
+    const ship4 = Ship(5);
+    const ship3 = Ship(4);
     const ship2 = Ship(3);
+    const ship1 = Ship(2);
+
     gameboard1.placeShip(0, 0, ship1);
     gameboard1.placeShip(1, 0, ship2);
+    gameboard1.placeShip(8, 6, ship3);
+    gameboard1.placeShip(6, 4, ship4);
+
     gameboard2.placeAiShips();
 
-    displayPlayerGameboard(player1, gameboard1);
-    displayPlayerGameboard(player2, gameboard2);
-
+    // displayPlayerGameboard(player1, gameboard1);
+    // displayPlayerGameboard(player2, gameboard2);
+    displayModal(gameboard1);
     const startGame = document.querySelector("button");
-    // eslint-disable-next-line no-use-before-define
     startGame.addEventListener("click", playGame);
   };
   
@@ -104,7 +109,10 @@ export default Game;
 // then have a start game button where they can start game
 // but before that the player has preplaced ships on their board and can drag and drop them to anywhere they want
 // so i need to be able to implement drag and drop
+// i need to be able to differentiate/individualize each ship so that when i try to drag one, 
+// the whole ships follows and not just a part of the ship
 // i can create a isValidCoordinates function that checks if a coordinate is valid, 
 // i can check if it's valid by using the conditionals in getRandomShipPlacements function
 // if it is valid,
 // then i need to place the ship at that coordinate
+
