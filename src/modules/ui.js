@@ -17,6 +17,8 @@ const displayPlayerGameboard = (player, gameboard) => {
       cell.dataset.column = columnNum;
 
       if (gameboard.getGameboard()[i][j] === "x") cell.classList.add("hit");
+      // if not ai then add a style to ship parts
+      if (player.getPlayerName() !== "ai" && gameboard.getGameboard()[i][j] === "o") cell.classList.add("ship-part");
       // else if (gameboard.getGameboard()[i][j] === "o") cell.textContent = "o";
       else if (gameboard.getGameboard()[i][j] === "m") cell.classList.add("miss");
       cell.classList.add("cell");

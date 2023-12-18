@@ -84,6 +84,10 @@ body {
   background-color: green;
 }
 
+.ship-part {
+  background-color: blue;
+}
+
 a {
   color: inherit;
 }
