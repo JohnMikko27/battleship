@@ -130,26 +130,3 @@ footer {
 .blur {
   opacity: 0.5;
 }
-
-/*
- * Modal
- */
-
-/* #modal {
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-#ships-container {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.ship {
-  display: flex;
-  background-color: gray;
-  width: min-content;
-  height: min-content;
-} */
