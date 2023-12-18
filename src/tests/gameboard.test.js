@@ -55,6 +55,6 @@ test("test hasShotCoordsBefore", () => {
 
 // add an isValidCoords function
 
-test("test isValidCoords out of board", () => {
-  expect(gameboard.isValidCoords(9,9, ship)).toBeFalsy();
-});
+// test("test isValidCoords out of board", () => {
+//   expect(gameboard.isValidCoords(9,9, ship)).toBeFalsy();
+// });

@@ -72,7 +72,6 @@ const Game = (() => {
           cells.forEach(cell => cell.removeEventListener("click", eventHandler));
           return;
         }
-        
         // displayPlayerGameboard(opposingPlayer, opposingPlayer.getBoard());
         switchActivePlayer();
         playGame();
@@ -86,7 +85,6 @@ const Game = (() => {
     
       if (opposingPlayer.getBoard().areAllShipsSunk()) {
         console.log(`all ships are sunk for playermikko ${opposingPlayer.getPlayerName()}`);
-        // add some end game stuff
         displayEndGameDisplay(activePlayer.getPlayerName(), createNewGame);
       }
       switchActivePlayer();
@@ -98,21 +96,3 @@ const Game = (() => {
 })();
 
 export default Game;
-
-// maybe when i implement drag and drop, i can have a function that checks if the ship will overlap/go out of board
-// if that's true then dont' place else place it
-// maybe if coordinates is in ships coordinates, then return???
-// after i get ai to place its ships randomly, i need to check the gameboard functions
-// now i can create a new game on load, then start a game if i hit button, then i can end the game after someone wins
-
-// so the plan is to intially display both player and ai boards, 
-// then have a start game button where they can start game
-// but before that the player has preplaced ships on their board and can drag and drop them to anywhere they want
-// so i need to be able to implement drag and drop
-// i need to be able to differentiate/individualize each ship so that when i try to drag one, 
-// the whole ships follows and not just a part of the ship
-// i can create a isValidCoordinates function that checks if a coordinate is valid, 
-// i can check if it's valid by using the conditionals in getRandomShipPlacements function
-// if it is valid,
-// then i need to place the ship at that coordinate
-

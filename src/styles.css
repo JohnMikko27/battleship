@@ -76,6 +76,14 @@ body {
   max-width: 30px;
 }
 
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: green;
+}
+
 a {
   color: inherit;
 }

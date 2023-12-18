@@ -19,18 +19,7 @@ const Gameboard = () => {
     }
   };
   createGameboard();
-  
-  // how do i make it so that ships won't overlap and ships won't go out of board?
-  // to make ships not overlap, since we're only doing things horizontally, 
-  // if row is in shipsCoordinates check if column is greater than that corresponding column and less than column + ship length
-  // if it is then that is an invalid row/column
-  // to make ships not go out of board, 
-  // if column (since ships are only going horizontally) + ship length > 10 (which is the length of board) 
-  // then say something about how it's invalid
-  // and what do i do if i do get row/column/ship length that are invalid? 
-  // maybe worry about this later, because it's not that urgent
-  // maybe refactor it in a way where only valid coordinates are given?
-  // maybe this is a function for drag and drop?
+
   const placeShip = (row, column, ship) => {
     for (let i = 0; i < ship.getLength(); i++) {
       // "o" means there is a ship/part of a ship on those coords
