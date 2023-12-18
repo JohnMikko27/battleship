@@ -1,7 +1,7 @@
 import player from "./player.js";
 import Gameboard from "./gameboard.js";
 import Ship from "./ship.js";
-import { displayPlayerGameboard, displayEndGameDisplay, displayModal } from "./ui.js";
+import { displayPlayerGameboard, displayEndGameDisplay } from "./ui.js";
 
 const Game = (() => {
   let player1;
@@ -35,7 +35,7 @@ const Game = (() => {
     displayPlayerGameboard(player1, gameboard1);
     displayPlayerGameboard(player2, gameboard2);
     // displayModal(gameboard1);
-    const startGame = document.querySelector("button");
+    const startGame = document.querySelector("#start-game-button");
     startGame.addEventListener("click", playGame);
   };
   

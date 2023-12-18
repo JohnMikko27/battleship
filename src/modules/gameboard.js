@@ -105,6 +105,10 @@ const Gameboard = () => {
     shipArr.forEach(obj => placeShip(obj.row, obj.column, obj.ship));
   };
 
+  // const isValidCoords = () => {
+
+  // }
+
   return { createGameboard, getGameboard, placeShip, receiveAttack, 
     getMissedAttacks, areAllShipsSunk, hasShotCoordsBefore, placeAiShips, getShipsCoordinates };
 };

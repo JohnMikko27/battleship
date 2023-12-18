@@ -1,4 +1,4 @@
-let shipLength;
+// let shipLength;
 
 const displayPlayerGameboard = (player, gameboard) => {
   let parentContainer;
@@ -41,7 +41,7 @@ const createEndGameDisplay = (winner, cb) => {
     cb();
     const lastChild = document.querySelector("body > div:last-child");
     document.body.removeChild(lastChild);
-    document.body.classList.remove("blur");
+    document.querySelector("#main").classList.remove("blur");
   });
 
   displayContainer.setAttribute("id", "end-game-display");
@@ -56,7 +56,7 @@ const displayEndGameDisplay = (winner, cb) => {
   const body = document.querySelector("body");
   const endGameDisplay = createEndGameDisplay(winner, cb);
   
-  body.classList.add("blur");
+  document.querySelector("#main").classList.add("blur");
   endGameDisplay.classList.remove("blur");
   body.appendChild(endGameDisplay);
 };
